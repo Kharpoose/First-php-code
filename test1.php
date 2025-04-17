@@ -120,3 +120,19 @@ if (isset($_GET["ad"])){
     echo "Merhaba $ad! <br>"; 
 } 
 ?>
+
+<form method="POST">
+    Ad: <input type="text" name="ad">
+    <button type="submit">Gönder</button>
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["ad"])) {
+        echo "Ad boş olamaz!";
+    } else {
+        $ad = htmlspecialchars($_POST["ad"]);
+        echo "Hoş geldin, $ad!";
+    }
+}
+?>
