@@ -115,10 +115,10 @@ echo "5 in karesi $sonuc " . "<br>";
 </form>
 
 <?php
-if (isset($_GET["ad"])){
+if (isset($_GET["ad"])) {
     $ad = $_GET["ad"];
-    echo "Merhaba $ad! <br>"; 
-} 
+    echo "Merhaba $ad! <br>";
+}
 ?>
 
 <form method="POST">
@@ -132,7 +132,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Ad boş olamaz!";
     } else {
         $ad = htmlspecialchars($_POST["ad"]);
-        echo "Hoş geldin, $ad!";
+        echo "Hoş geldin, $ad! <br>";
     }
 }
+?>
+<?php
+
+$f = fopen("test.txt", "w");
+fwrite($f, "Merhaba dünya!");
+fclose($f);
+?>
+<?php
+$f = fopen("test.txt", "r");
+$icerik = fread($f, filesize("test.txt"));
+fclose($f);
+echo $icerik;
+?>
+
+<form method="post">
+    Input: <input type="text" name="in">
+    <button type="submit">Send</button>
+</form>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["in"])) {
+        echo "Input is empty!";
+    } else {
+        $ad = htmlspecialchars($_POST["in"]);
+        $x = fopen("input.txt", "a");
+        fwrite($x, $ad . "\n");
+        fclose($x);
+        echo $ad . "<br>";
+        echo file_get_contents("input.txt") . "<br>";
+    }
+}
+
+
 ?>
