@@ -156,7 +156,7 @@ echo $icerik;
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["in"])) {
-        echo "Input is empty!";
+        echo "Input is empty!" . "<br>";
     } else {
         $ad = htmlspecialchars($_POST["in"]);
         $x = fopen("input.txt", "a");
@@ -166,6 +166,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo file_get_contents("input.txt") . "<br>";
     }
 }
+?>
+<?php
+$Renkler = ["Kırmızı", "Yeşil", "Mavi"];
+$Renkler[] = "Sarı";
+echo count($Renkler) . "<br>";
+?>
 
+<form method="post">
+    in: <input type="text" name="deneme1">
+    <button type="submit">Send</button>
+</form>
 
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["deneme1"])) {
+        echo "Input is empty!" . "<br>";
+    } else {
+        $veri = htmlspecialchars($_POST["deneme1"]);
+
+        // Dosyaya ekle
+        $dosya = fopen("array.txt", "a");
+        fwrite($dosya, $veri . PHP_EOL);
+        fclose($dosya);
+
+        // Dosyanın içeriğini göster
+        echo "<strong>Dosya içeriği:</strong><br><pre>" . file_get_contents("array.txt") . "</pre>";
+    }
+}
 ?>
