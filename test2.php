@@ -45,6 +45,7 @@ if (in_array("muz", $meyveler)) {
 }
 array_push($meyveler, "kivi", "karpuz");
 $sebzeler = ["domates", "test", "patates"];
+$tursu = ["salatalik", "sogan", "sarmasik"];
 $birlestir = array_merge($meyveler, $sebzeler);
 echo $birlestir[5] . "<br>";
 sort($birlestir);
