@@ -1,4 +1,40 @@
 <?php
+
+$host = 'postgres-example'; // IP değil, konteyner ismi!
+$db = 'postgres';  // Burada veritabanı adını doğru yazdığınızdan emin olun.
+$user = 'postgres';
+$pass = 'postgres';
+$charset = 'utf8';
+
+$dsn = "pgsql:host=$host;dbname=$db";
+try {
+    $pdo = new PDO($dsn, $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Bağlantı başarılı!<br>";
+
+    // Test sorgusu
+    $stmt = $pdo->query("SELECT NOW()");
+    $now = $stmt->fetchColumn();
+    echo "PostgreSQL zamanı: $now";
+} catch (PDOException $e) {
+    echo "Bağlantı hatası: " . $e->getMessage();
+}
+
+
+ // Kullanıcıları çek
+ $stmt = $pdo->query("SELECT * FROM post");
+ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+echo "<br>";
+ foreach ($users as $user) {
+     echo "ID: {$user['id']} - Name: {$user['created_by']} - comment: {$user['comment']}<br>";
+ }
+?>
+
+
+
+
+<?php
+echo "<br>";
 function selamla_kisi($kisi = "Ziyaretci")
 {
     echo "Selam $kisi <br>";
@@ -51,4 +87,5 @@ echo $birlestir[5] . "<br>";
 sort($birlestir);
 print_r($birlestir);
 echo "<br>";
+echo "denemelklasasd";
 ?>
